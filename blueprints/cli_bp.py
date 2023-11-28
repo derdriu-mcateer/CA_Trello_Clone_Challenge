@@ -17,29 +17,28 @@ def create_db():
 def seed_db():
     from datetime import date
     # create the first card object
-    card1 = Card(
-        # set the attributes, not the id, SQLAlchemy will manage that for us
-        title = "Start the project",
-        description = "Stage 1, creating the database",
-        status = "To Do",
-        priority = "High",
-        date = date.today()
-    )
+    cards = [
+        Card(
+            title="Start the project",
+            description="Stage 1 - ERD Creation",
+            status="Done",
+            date_created=date.today(),
+        ),
+        Card(
+            title="ORM Queries",
+            description="Stage 2 - Implement CRUD queries",
+            status="In Progress",
+            date_created=date.today(),
+        ),
+        Card(
+            title="Marshmallow",
+            description="Stage 3 - Implement JSONify of models",
+            status="In Progress",
+            date_created=date.today(),
+        ),
+    ]
 
-    # Add the object as a new row to the table
-    db.session.add(card1)
-    
-    # create the second card object
-    card2 = Card(
-        # set the attributes, not the id, SQLAlchemy will manage that for us
-        title = "SQLAlchemy and Marshmallow",
-        description = "Stage 2, integrate both modules in the project",
-        status = "Ongoing",
-        priority = "High",
-        date = date.today()
-    )
-    # Add the object as a new row to the table
-    db.session.add(card2)
+    db.session.add_all(cards)
 
     users = [
         User(
@@ -65,3 +64,5 @@ def seed_db():
 def drop_db():
     db.drop_all()
     print("Tables dropped") 
+
+    # db.session.add(card1)
