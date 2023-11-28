@@ -21,3 +21,7 @@ ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
 # create an instance of JWTManager
 jwt = JWTManager(app)
+
+@app.errorhandler(401)
+def unauthorised(err):
+    return {'error': 'You must be an admin'}
